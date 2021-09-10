@@ -41,8 +41,9 @@ if make_plot:
     plt.show()
 
 # Cost of electricity in Texas and New Mexico
-k_texas_mean = 11.39 # Cost of electricity in Texas in cents
-k_texas_std = 1.5 # Cost of electricity in Texas in cents
+# 11.39 # texas cost
+k_electricity_mean = 3.5 # Cost of electricity in Texas in cents
+k_electricity_std = .5 # Cost of electricity in Texas in cents
 
 avg_kwh_mean = 369 # Average kwh used per NFT
 avg_kwh_std = 20 # Average kwh used per NFT
@@ -61,12 +62,12 @@ while len(cost_paths_list) < cost_path_simulations:
     post_tau_cost = []
     while len(pre_tau_cost) < tau_draw:
         avg_kwh_draw = np.random.normal(avg_kwh_mean, avg_kwh_std, 1)
-        k_electricity_draw = np.random.normal(k_texas_mean, k_texas_std, 1)
+        k_electricity_draw = np.random.normal(k_electricity_mean, k_electricity_std, 1)
         nft_cost_day_pre = avg_kwh_draw * k_electricity_draw # We want to produce 1 NFT/day
         pre_tau_cost.append(nft_cost_day_pre[0])
     while len(post_tau_cost) < num_days_year - tau_draw:
         avg_kwh_draw = np.random.normal(avg_kwh_mean, avg_kwh_std, 1)
-        k_electricity_draw = np.random.normal(k_texas_mean, k_texas_std, 1)
+        k_electricity_draw = np.random.normal(k_electricity_mean, k_electricity_std, 1)
         nft_cost_day_post = avg_kwh_draw * k_electricity_draw * 1/m_draw  # We want to produce 1 NFT/day. Reduction of m
         post_tau_cost.append(nft_cost_day_post[0])
 
